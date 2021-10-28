@@ -8,6 +8,28 @@ import java.util.List;
 public class CostServiceImpl implements CostService {
     @Override
     public ConnectionCost calculateCost(List<Connection> connections) {
-        return null;
+        final double totalDriverCost = connections
+                .stream()
+                .map(CostServiceImpl::calculateDriverCost)
+                .mapToDouble(Double::doubleValue)
+                .sum();
+
+        final double totalBusCost = connections
+                .stream()
+                .map(CostServiceImpl::calculateBusCost)
+                .mapToDouble(Double::doubleValue)
+                .sum();
+
+        final double totalCost = totalBusCost + totalDriverCost;
+
+        return new ConnectionCost(totalBusCost, totalDriverCost, totalCost);
+    }
+
+    private static double calculateDriverCost(Connection connection) {
+        return connection.getDriverCostPerHr() * connection.getDuration();
+    }
+
+    private static double calculateBusCost(Connection connection) {
+        return connection.getBusCostPerKm() * connection.getDistance();
     }
 }

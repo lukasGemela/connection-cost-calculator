@@ -8,7 +8,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class ConnectionCost {
-    private double totalBusCost;
-    private double totalDriverCost;
-    private double totalCost;
+    private final double totalBusCost;
+    private final double totalDriverCost;
+    private final double totalCost;
 }
