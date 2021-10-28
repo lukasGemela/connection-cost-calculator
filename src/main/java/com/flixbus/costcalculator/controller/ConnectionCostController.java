@@ -1,20 +1,16 @@
 package com.flixbus.costcalculator.controller;
 
-import com.flixbus.costcalculator.service.PathService;
-import io.swagger.annotations.ApiParam;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.flixbus.costcalculator.service.ConnectionService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 
 @RestController
 @RequestMapping(path = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ConnectionCostController {
 
-    private final PathService pathCostService;
+    private final ConnectionService pathCostService;
 
-    public ConnectionCostController(PathService pathCostService) {
+    public ConnectionCostController(ConnectionService pathCostService) {
         this.pathCostService = pathCostService;
     }
 

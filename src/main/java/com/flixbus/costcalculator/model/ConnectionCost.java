@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @AllArgsConstructor
 @ToString
-public class PathCost {
+public class ConnectionCost {
     private double totalBusCost;
     private double totalDriverCost;
     private double totalCost;

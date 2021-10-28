@@ -1,6 +1,6 @@
-package com.flixbus.costcalculator.adapter.paths;
+package com.flixbus.costcalculator.adapter.connections;
 
-import com.flixbus.costcalculator.adapter.paths.api.CityEntity;
+import com.flixbus.costcalculator.adapter.connections.api.CityEntity;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;

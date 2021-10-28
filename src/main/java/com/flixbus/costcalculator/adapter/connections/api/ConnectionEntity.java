@@ -1,4 +1,4 @@
-package com.flixbus.costcalculator.adapter.paths.api;
+package com.flixbus.costcalculator.adapter.connections.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
