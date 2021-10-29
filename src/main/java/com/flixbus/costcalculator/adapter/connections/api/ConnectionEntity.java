@@ -2,6 +2,7 @@ package com.flixbus.costcalculator.adapter.connections.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.data.neo4j.core.schema.*;
 
 @RelationshipProperties

@@ -1,0 +1,18 @@
+CREATE (prague:City { name: "Prague" })
+CREATE (brno:City { name: "Brno" })
+CREATE (pilsen:City { name: "Pilsen" })
+CREATE (rome:City { name: "Rome" })
+CREATE (nue:City { name: "Nürnberg" })
+CREATE (munich:City { name: "Munich" })
+CREATE (paris:City { name: "Paris" })
+CREATE (london:City { name: "London" })
+CREATE (hamburg:City { name: "Hamburg" })
+
+CREATE (prague)-[:IS_CONNECTED  {bus_cost_per_km: 1.0, distance: 10, driver_cost_per_hr: 10.0, duration: 1, line_id: 1}]->(brno)
+CREATE (brno)-[:IS_CONNECTED    {bus_cost_per_km: 2.0, distance: 20, driver_cost_per_hr: 20.0, duration: 2, line_id: 1}]->(pilsen)
+CREATE (pilsen)-[:IS_CONNECTED  {bus_cost_per_km: 3.0, distance: 30, driver_cost_per_hr: 30.0, duration: 3, line_id: 4}]->(rome)
+CREATE (rome)-[:IS_CONNECTED    {bus_cost_per_km: 4.0, distance: 40, driver_cost_per_hr: 40.0, duration: 4, line_id: 2}]->(nue)
+CREATE (nue)-[:IS_CONNECTED     {bus_cost_per_km: 5.0, distance: 50, driver_cost_per_hr: 50.0, duration: 5, line_id: 5}]->(munich)
+CREATE (paris)-[:IS_CONNECTED   {bus_cost_per_km: 6.0, distance: 60, driver_cost_per_hr: 60.0, duration: 6, line_id: 6}]->(london)
+CREATE (london)-[:IS_CONNECTED  {bus_cost_per_km: 7.0, distance: 70, driver_cost_per_hr: 70.0, duration: 7, line_id: 7}]->(hamburg)
+
