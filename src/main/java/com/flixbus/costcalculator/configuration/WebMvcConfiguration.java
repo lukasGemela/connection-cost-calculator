@@ -31,7 +31,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("connection cost calculator")
-                .description("description")
+                .description("connection cost calculator")
                 .version("1.0")
                 .build();
     }

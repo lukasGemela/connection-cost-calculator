@@ -1,7 +1,9 @@
 spring:
   neo4j:
     uri: bolt://localhost:7687
-
+server:
+  error:
+    include-message: always
 
 management:
   endpoint:
