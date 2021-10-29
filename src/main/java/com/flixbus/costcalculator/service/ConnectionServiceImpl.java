@@ -15,6 +15,6 @@ public class ConnectionServiceImpl implements ConnectionService {
 
     @Override
     public List<Connection> getConnection(String cityA, String cityB) {
-        return connectionAdapter.findShortestPath(cityA, cityB);
+        return connectionAdapter.getConnection(cityA, cityB);
     }
 }

@@ -1,7 +1,5 @@
 package com.flixbus.costcalculator.adapter.connections;
 
-import com.flixbus.costcalculator.adapter.connections.api.CityEntity;
-import com.flixbus.costcalculator.adapter.connections.api.ConnectionEntity;
 import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguration;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -14,16 +12,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.data.neo4j.DataNeo4jTest;
 import org.springframework.core.io.Resource;
 import org.springframework.data.neo4j.core.Neo4jClient;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
-import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
-
+import static com.flixbus.costcalculator.fixtures.CityEntityFixtures.pilsenToNurembergCityEntityFixture;
 import static com.flixbus.costcalculator.utils.Utils.asString;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -71,7 +63,7 @@ class CityRepositoryTest {
                 .usingRecursiveFieldByFieldElementComparator(RecursiveComparisonConfiguration.builder()
                         .withIgnoredFieldsMatchingRegexes(".*id$")
                         .build())
-                .hasSameElementsAs(pilsenToNurembergPath());
+                .hasSameElementsAs(pilsenToNurembergCityEntityFixture());
     }
 
     @Test
@@ -84,7 +76,7 @@ class CityRepositoryTest {
                 .usingRecursiveFieldByFieldElementComparator(RecursiveComparisonConfiguration.builder()
                         .withIgnoredFieldsMatchingRegexes(".*id$")
                         .build())
-                .hasSameElementsAs(pilsenToNurembergPath());
+                .hasSameElementsAs(pilsenToNurembergCityEntityFixture());
     }
 
     @Test
@@ -104,17 +96,6 @@ class CityRepositoryTest {
 
         assertThat(result).isEmpty();
     }
-
-    private static List<CityEntity> pilsenToNurembergPath() {
-        final var nuremberg = new CityEntity(0L, "Nürnberg", List.of());
-        final var romeToNueConn = new ConnectionEntity(0L,4.0, 40, 40.0, 4, 2, nuremberg);
-        final var rome = new CityEntity(0L, "Rome", List.of(romeToNueConn));
-        final var pilsenToRomeConn = new ConnectionEntity(0L,3.0, 30, 30.0, 3, 4, rome);
-        final var pilsen = new CityEntity(0L, "Pilsen", List.of(pilsenToRomeConn));
-
-        return List.of(nuremberg, rome, pilsen);
-    }
-
 
     @DynamicPropertySource
     static void neo4jProperties(DynamicPropertyRegistry registry) {

@@ -3,21 +3,29 @@ package com.flixbus.costcalculator.adapter.connections;
 import com.flixbus.costcalculator.adapter.connections.api.CityEntity;
 import com.flixbus.costcalculator.adapter.connections.api.ConnectionEntity;
 import com.flixbus.costcalculator.model.Connection;
-import org.springframework.lang.Nullable;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class ConnectionMapper {
+@Component
+@AllArgsConstructor
+public class ConnectionAdapterImpl implements ConnectionAdapter {
 
-    static List<Connection> toConnections(List<CityEntity> cityConnectionPath) {
+    private final CityRepository cityRepository;
+
+    public List<Connection> getConnection(String originCity, String destinationCity) {
+
+        final var citiesOnPath = cityRepository.findAllOnShortestPathBetween(originCity, destinationCity);
+        return toConnections(citiesOnPath);
+    }
+
+    private static List<Connection> toConnections(List<CityEntity> cityConnectionPath) {
         return cityConnectionPath
                 .stream()
-                .map(ConnectionMapper::toConnection)
+                .map(ConnectionAdapterImpl::toConnection)
                 .flatMap(Optional::stream)
                 .collect(Collectors.toUnmodifiableList());
     }
@@ -32,14 +40,10 @@ public class ConnectionMapper {
                         connectionEntity.getDriverCostPerHr(),
                         connectionEntity.getDuration(),
                         connectionEntity.getLineId()
-                        ));
+                ));
     }
 
     private static Optional<ConnectionEntity> getConnectionToNextCity(CityEntity cityEntity) {
         return cityEntity.getConnections().stream().findFirst();
     }
-
-
-
-
 }
