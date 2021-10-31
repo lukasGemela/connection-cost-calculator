@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +28,12 @@ public class ConnectionCostController {
     public ConnectionCostResponse getConnectionCost(
                                  @RequestParam("originCity") String originCity,
                                   @RequestParam("destinationCity") String destinationCity) {
-        return connectionService.getConnection(originCity, destinationCity)
+
+        if (!StringUtils.hasText(originCity) || !StringUtils.hasText(destinationCity)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "City name cannot be empty");
+        }
+
+        return connectionService.getConnection(originCity.trim(), destinationCity.trim())
                 .map(ConnectionCostController::toConnectionCostResponse)
                 .orElseThrow(connectionDoesNotExistException(originCity, destinationCity));
     }

@@ -94,7 +94,7 @@ public class CostCalculatorComponentTest {
     }
 
     @Test
-    void sadPath_nonExistingConnection_shouldReturn404() throws Exception {
+    void unhappyPath_nonExistingConnection_shouldReturn404() throws Exception {
 
         mockMvc.perform(
                         get("/api/v1/connection/cost")
@@ -102,6 +102,28 @@ public class CostCalculatorComponentTest {
                                 .param("destinationCity", "Rome"))
                 .andExpect(status().isNotFound())
                 .andExpect(status().reason( "Connection between Prague and Rome could not be found"));
+    }
+
+    @Test
+    void sadPath_originCityStringEmpty_shouldReturn400() throws Exception {
+
+        mockMvc.perform(
+                        get("/api/v1/connection/cost")
+                                .param("originCity", "    ")
+                                .param("destinationCity", "Rome"))
+                .andExpect(status().isBadRequest())
+                .andExpect(status().reason("City name cannot be empty"));
+    }
+
+    @Test
+    void sadPath_destinationCityStringEmpty_shouldReturn400() throws Exception {
+
+        mockMvc.perform(
+                        get("/api/v1/connection/cost")
+                                .param("originCity", "Prague")
+                                .param("destinationCity", "    "))
+                .andExpect(status().isBadRequest())
+                .andExpect(status().reason("City name cannot be empty"));
     }
 
     private static void injectTestData(Resource scriptFile) throws Exception {
