@@ -127,6 +127,17 @@ public class CostCalculatorComponentTest {
                 .andExpect(status().reason("City name cannot be empty"));
     }
 
+    @Test
+    void sadPath_citiesIdentical_shouldReturn400() throws Exception {
+
+        mockMvc.perform(
+                        get("/api/v1/connection/cost")
+                                .param("originCity", "Prague")
+                                .param("destinationCity", "Prague"))
+                .andExpect(status().isBadRequest())
+                .andExpect(status().reason("City names must differ"));
+    }
+
     private static void injectTestData(Resource scriptFile) throws Exception {
         final var targetFileNamePath = "/var/lib/neo4j/import/" + UUID.randomUUID();
         NEO4J_CONTAINER.copyFileToContainer(MountableFile.forHostPath(scriptFile.getFile().getPath()), targetFileNamePath);

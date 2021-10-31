@@ -28,14 +28,24 @@ public class ConnectionCostController {
     public ConnectionCostResponse getConnectionCost(
                                  @RequestParam("originCity") String originCity,
                                   @RequestParam("destinationCity") String destinationCity) {
+        final var originCityTrimmed = originCity.trim();
+        final var destinationCityTrimmed = destinationCity.trim();
 
-        if (!StringUtils.hasText(originCity) || !StringUtils.hasText(destinationCity)) {
+        validateInputs(originCityTrimmed, destinationCityTrimmed);
+
+        return connectionService.getConnection(originCityTrimmed, destinationCityTrimmed)
+                .map(ConnectionCostController::toConnectionCostResponse)
+                .orElseThrow(connectionDoesNotExistException(originCity, destinationCity));
+    }
+
+    private static void validateInputs(String originCityTrimmed, String destinationCityTrimmed) {
+        if (!StringUtils.hasText(originCityTrimmed) || !StringUtils.hasText(destinationCityTrimmed)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "City name cannot be empty");
         }
 
-        return connectionService.getConnection(originCity.trim(), destinationCity.trim())
-                .map(ConnectionCostController::toConnectionCostResponse)
-                .orElseThrow(connectionDoesNotExistException(originCity, destinationCity));
+        if (originCityTrimmed.equals(destinationCityTrimmed)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "City names must differ");
+        }
     }
 
     private static Supplier<RuntimeException> connectionDoesNotExistException(String originCity, String destinationCity) {
