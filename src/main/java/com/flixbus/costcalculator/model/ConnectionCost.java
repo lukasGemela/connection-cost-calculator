@@ -11,4 +11,5 @@ public class ConnectionCost {
     private final double totalBusCost;
     private final double totalDriverCost;
     private final double totalCost;
+    private final int numberOfLines;
 }

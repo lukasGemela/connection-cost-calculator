@@ -8,11 +8,13 @@ import com.flixbus.costcalculator.service.CostService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,18 +46,10 @@ public class ConnectionCostController {
 
     private static ConnectionCostResponse toConnectionCostResponse(ConnectionCost connectionCost, List<Connection> connection) {
         return new ConnectionCostResponse(
-            getNumberOfLines(connection),
+                connectionCost.getNumberOfLines(),
                 connectionCost.getTotalBusCost(),
                 connectionCost.getTotalDriverCost(),
                 connectionCost.getTotalCost()
         );
-    }
-
-    private static int getNumberOfLines(List<Connection> connection) {
-        return connection
-                .stream()
-                .map(Connection::getLineId)
-                .collect(Collectors.toUnmodifiableSet())
-                .size();
     }
 }

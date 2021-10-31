@@ -15,14 +15,14 @@
         </layout>
     </appender>
 
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="json"/>
     </root>
-    <logger name="com.flixbus.costcalculator.Application" level="DEBUG" additivity="false">
+    <logger name="com.flixbus.costcalculator.Application" level="INFO" additivity="false">
         <appender-ref ref="json" />
     </logger>
 
-    <logger name="com.flixbus.costcalculator" level="DEBUG" additivity="false">
+    <logger name="com.flixbus.costcalculator" level="INFO" additivity="false">
         <appender-ref ref="json" />
     </logger>
 

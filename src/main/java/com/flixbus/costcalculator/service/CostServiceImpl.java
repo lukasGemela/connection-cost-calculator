@@ -5,6 +5,7 @@ import com.flixbus.costcalculator.model.ConnectionCost;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CostServiceImpl implements CostService {
@@ -24,7 +25,15 @@ public class CostServiceImpl implements CostService {
 
         final double totalCost = totalBusCost + totalDriverCost;
 
-        return new ConnectionCost(totalBusCost, totalDriverCost, totalCost);
+        return new ConnectionCost(totalBusCost, totalDriverCost, totalCost, getNumberOfLines(connections));
+    }
+
+    private static int getNumberOfLines(List<Connection> connection) {
+        return connection
+                .stream()
+                .map(Connection::getLineId)
+                .collect(Collectors.toUnmodifiableSet())
+                .size();
     }
 
     private static double calculateDriverCost(Connection connection) {

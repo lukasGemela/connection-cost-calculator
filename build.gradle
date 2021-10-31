@@ -17,8 +17,6 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'jacoco'
-apply plugin: "org.owasp.dependencycheck"
 
 group 'com.gfk.ffa.pr'
 version '1.0-SNAPSHOT'
@@ -54,8 +52,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     runtime("io.micrometer:micrometer-registry-prometheus:1.5.3")
 
+    testImplementation group: 'org.testcontainers', name: 'neo4j', version: '1.16.2'
+    testImplementation "org.testcontainers:testcontainers:1.16.2"
+
     testCompile("org.assertj:assertj-core:3.21.0")
-    testCompile "org.testcontainers:testcontainers:1.16.0"
     testCompile group: 'org.awaitility', name: 'awaitility', version: '4.0.2'
     testCompile (group: 'org.neo4j.test', name: 'neo4j-harness', version: '4.3.6') {
         exclude group: 'org.slf4j', module: 'slf4j-nop'
@@ -63,25 +63,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.5'
 }
 
-bootJar {
-    mainClassName = "com.gfk.ffa.pr.Application"
-}
-
-jacocoTestReport {
-    reports {
-        xml.enabled true
-    }
-    finalizedBy 'jacocoSummary'
-}
-
-plugins.withType(JacocoPlugin) {
-    tasks["test"].finalizedBy 'jacocoTestReport'
-}
-
-dependencyCheck {
-    formats = ['json', 'html', 'junit']
-}
-
-task jacocoSummary() {
-
+springBoot {
+    mainClass = 'com.flixbus.costcalculator.Application'
 }
