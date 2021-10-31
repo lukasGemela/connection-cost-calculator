@@ -5,7 +5,7 @@ import com.flixbus.costcalculator.model.Connection;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Optional;
 
 @Component
 @AllArgsConstructor
@@ -14,7 +14,7 @@ public class ConnectionServiceImpl implements ConnectionService {
     private final ConnectionAdapter connectionAdapter;
 
     @Override
-    public List<Connection> getConnection(String cityA, String cityB) {
+    public Optional<Connection> getConnection(String cityA, String cityB) {
         return connectionAdapter.getConnection(cityA, cityB);
     }
 }

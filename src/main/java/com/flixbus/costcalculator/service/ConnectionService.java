@@ -2,9 +2,9 @@ package com.flixbus.costcalculator.service;
 
 import com.flixbus.costcalculator.model.Connection;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface ConnectionService {
 
-    List<Connection> getConnection(String cityA, String cityB);
+    Optional<Connection> getConnection(String cityA, String cityB);
 }

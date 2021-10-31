@@ -1,14 +1,14 @@
 package com.flixbus.costcalculator.fixtures;
 
-import com.flixbus.costcalculator.model.Connection;
+import com.flixbus.costcalculator.model.ConnectionFragment;
 
 import java.util.List;
 
-public class ConnectionFixtures {
+public class ConnectionFragmentFixtures {
 
-    public static List<Connection> pilsenToNurembergConnectionFixture() {
+    public static List<ConnectionFragment> pilsenToNurembergConnectionFragmentsFixture() {
 
-        return List.of(new Connection(
+        return List.of(new ConnectionFragment(
                         "Pilsen",
                         "Rome",
                         3.0,
@@ -17,7 +17,7 @@ public class ConnectionFixtures {
                         3,
                         4
                 ),
-                new Connection(
+                new ConnectionFragment(
                         "Rome",
                         "Nürnberg",
                         4.0,
@@ -28,9 +28,9 @@ public class ConnectionFixtures {
                 ));
     }
 
-    public static List<Connection> singleLineBetweenMultipleCitiesFixture() {
+    public static List<ConnectionFragment> singleLineBetweenMultipleCitiesFixture() {
 
-        return List.of(new Connection(
+        return List.of(new ConnectionFragment(
                         "Pilsen",
                         "Rome",
                         3.0,
@@ -39,7 +39,7 @@ public class ConnectionFixtures {
                         3,
                         4
                 ),
-                new Connection(
+                new ConnectionFragment(
                         "Rome",
                         "Nürnberg",
                         4.0,
@@ -48,7 +48,7 @@ public class ConnectionFixtures {
                         4,
                         2
                 ),
-                new Connection(
+                new ConnectionFragment(
                         "Nürnberg",
                         "Budapest",
                         4.0,

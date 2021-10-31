@@ -1,5 +1,7 @@
 package com.flixbus.costcalculator.adapter.connections;
 
+import com.flixbus.costcalculator.model.Connection;
+import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,7 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static com.flixbus.costcalculator.fixtures.CityEntityFixtures.pilsenToNurembergCityEntityFixture;
-import static com.flixbus.costcalculator.fixtures.ConnectionFixtures.pilsenToNurembergConnectionFixture;
+import static com.flixbus.costcalculator.fixtures.ConnectionFragmentFixtures.pilsenToNurembergConnectionFragmentsFixture;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -32,8 +34,8 @@ class ConnectionAdapterTest {
                 .thenReturn(pilsenToNurembergCityEntityFixture());
 
         assertThat(connectionAdapter.getConnection("Pilsen", "Nürnberg"))
-                .usingRecursiveFieldByFieldElementComparator()
-                .hasSameElementsAs(pilsenToNurembergConnectionFixture());
+                .usingRecursiveComparison(RecursiveComparisonConfiguration.builder().withIgnoreCollectionOrder(true).build())
+                .isEqualTo(Connection.createConnection(pilsenToNurembergConnectionFragmentsFixture()));
     }
 
     @Test

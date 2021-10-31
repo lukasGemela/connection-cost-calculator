@@ -3,6 +3,7 @@ package com.flixbus.costcalculator.adapter.connections;
 import com.flixbus.costcalculator.adapter.connections.api.CityEntity;
 import com.flixbus.costcalculator.adapter.connections.api.ConnectionEntity;
 import com.flixbus.costcalculator.model.Connection;
+import com.flixbus.costcalculator.model.ConnectionFragment;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,23 +17,23 @@ public class ConnectionAdapterImpl implements ConnectionAdapter {
 
     private final CityRepository cityRepository;
 
-    public List<Connection> getConnection(String originCity, String destinationCity) {
+    public Optional<Connection> getConnection(String originCity, String destinationCity) {
 
         final var citiesOnPath = cityRepository.findAllOnShortestPathBetween(originCity, destinationCity);
-        return toConnections(citiesOnPath);
+        return Connection.createConnection(toConnectionFragments(citiesOnPath));
     }
 
-    private static List<Connection> toConnections(List<CityEntity> cityConnectionPath) {
+    private static List<ConnectionFragment> toConnectionFragments(List<CityEntity> cityConnectionPath) {
         return cityConnectionPath
                 .stream()
-                .map(ConnectionAdapterImpl::toConnection)
+                .map(ConnectionAdapterImpl::toConnectionFragment)
                 .flatMap(Optional::stream)
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private static Optional<Connection> toConnection(CityEntity cityEntity) {
+    private static Optional<ConnectionFragment> toConnectionFragment(CityEntity cityEntity) {
         return getConnectionToNextCity(cityEntity)
-                .map(connectionEntity -> new Connection(
+                .map(connectionEntity -> new ConnectionFragment(
                         cityEntity.getName(),
                         connectionEntity.getCity().getName(),
                         connectionEntity.getBusCostPerKm(),

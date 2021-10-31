@@ -2,8 +2,8 @@ package com.flixbus.costcalculator.adapter.connections;
 
 import com.flixbus.costcalculator.model.Connection;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface ConnectionAdapter {
-    List<Connection> getConnection(String originCity, String destinationCity);
+    Optional<Connection> getConnection(String originCity, String destinationCity);
 }
