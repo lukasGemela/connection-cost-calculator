@@ -30,17 +30,17 @@ test {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation:2.5.5'
-    compile group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
-    compile group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+    implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
+    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
+    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-neo4j'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.3.4.RELEASE'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.0'
-    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: '2.10.1'
-    compile group: 'ch.qos.logback.contrib', name: 'logback-json-classic', version: '0.1.5'
-    compile group: 'ch.qos.logback.contrib', name: 'logback-jackson', version: '0.1.5'
-    compile group: 'org.slf4j', name: 'jul-to-slf4j', version: '1.7.30'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.3.4.RELEASE'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.0'
+    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: '2.10.1'
+    implementation group: 'ch.qos.logback.contrib', name: 'logback-json-classic', version: '0.1.5'
+    implementation group: 'ch.qos.logback.contrib', name: 'logback-jackson', version: '0.1.5'
+    implementation group: 'org.slf4j', name: 'jul-to-slf4j', version: '1.7.30'
 
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor group: 'org.springframework.boot', name: 'spring-boot-configuration-processor'
@@ -51,9 +51,9 @@ dependencies {
     testImplementation group: 'org.testcontainers', name: 'neo4j', version: '1.16.2'
     testImplementation "org.testcontainers:testcontainers:1.16.2"
 
-    testCompile("org.assertj:assertj-core:3.21.0")
-    testCompile group: 'org.awaitility', name: 'awaitility', version: '4.0.2'
-    testCompile (group: 'org.neo4j.test', name: 'neo4j-harness', version: '4.3.6') {
+    testImplementation("org.assertj:assertj-core:3.21.0")
+    testImplementation group: 'org.awaitility', name: 'awaitility', version: '4.0.2'
+    testImplementation (group: 'org.neo4j.test', name: 'neo4j-harness', version: '4.3.6') {
         exclude group: 'org.slf4j', module: 'slf4j-nop'
     }
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.5'
