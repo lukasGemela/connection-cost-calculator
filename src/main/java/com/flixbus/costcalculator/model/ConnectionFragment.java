@@ -12,6 +12,6 @@ public class ConnectionFragment {
     private final double busCostPerKm;
     private final int distance;
     private final double driverCostPerHr;
-    private final int duration;
+    private final double duration;
     private final int lineId;
 }

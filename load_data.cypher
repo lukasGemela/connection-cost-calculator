@@ -16,7 +16,7 @@ MERGE (c:City {name: row.city2});
 LOAD CSV WITH HEADERS FROM "file:///data/connection.csv" as row
 MATCH (c1:City {name: row.city1})
 MATCH (c2:City {name: row.city2})
-MERGE (c1)-[:IS_CONNECTED {distance:toInteger(row.distance), duration:toInteger(row.duration), line_id:toInteger(row.line_id)}]-(c2);
+MERGE (c1)-[:IS_CONNECTED {distance:toInteger(row.distance), duration:toFloat(row.duration), line_id:toInteger(row.line_id)}]-(c2);
 
 LOAD CSV WITH HEADERS FROM "file:///data/driver_cost.csv" as row
 MATCH (c1: City)-[conn:IS_CONNECTED {line_id:toInteger(row.line_id)}]-(c2: City)

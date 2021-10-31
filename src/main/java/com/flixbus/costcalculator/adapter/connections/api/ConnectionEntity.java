@@ -2,7 +2,6 @@ package com.flixbus.costcalculator.adapter.connections.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
 import org.springframework.data.neo4j.core.schema.*;
 
 @RelationshipProperties
@@ -20,7 +19,7 @@ public class ConnectionEntity {
     @Property("driver_cost_per_hr")
     private final double driverCostPerHr;
     @Property("duration")
-    private final int duration;
+    private final double duration;
     @Property("line_id")
     private final int lineId;
 
