@@ -16,7 +16,7 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 
 import static com.flixbus.costcalculator.fixtures.CityEntityFixtures.pilsenToNurembergCityEntityFixture;
-import static com.flixbus.costcalculator.utils.Utils.asString;
+import static com.flixbus.costcalculator.utils.TestUtils.asString;
 import static org.assertj.core.api.Assertions.assertThat;
 
 

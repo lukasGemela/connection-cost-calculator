@@ -9,7 +9,7 @@ import java.io.UncheckedIOException;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-public class Utils {
+public class TestUtils {
     public static String asString(Resource resource) {
         try (final var reader = new InputStreamReader(resource.getInputStream(), UTF_8)) {
             return FileCopyUtils.copyToString(reader);
