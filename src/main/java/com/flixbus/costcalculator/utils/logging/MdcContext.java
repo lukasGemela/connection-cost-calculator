@@ -15,21 +15,7 @@ public class MdcContext {
         MDC.put(REQUEST_ID, requestId);
     }
 
-    public String getRequestId() {
-        return getContextMap().get(REQUEST_ID);
-    }
-
     public void clearContext() {
         MDC.clear();
     }
-
-    public Map<String, String> getContextMap() {
-        return Optional.ofNullable(MDC.getCopyOfContextMap()).orElseGet(Map::of);
-    }
-
-    public void setContextMap(Map<String, String> contextMap) {
-        MDC.setContextMap(contextMap);
-    }
-
-
 }

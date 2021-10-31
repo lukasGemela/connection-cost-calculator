@@ -1,5 +1,9 @@
 package com.flixbus.costcalculator.configuration;
 
+import com.flixbus.costcalculator.utils.logging.MdcContext;
+import com.flixbus.costcalculator.utils.logging.MdcFilter;
+import com.flixbus.costcalculator.utils.logging.RandomIdGenerator;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -34,6 +38,22 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                 .description("connection cost calculator")
                 .version("1.0")
                 .build();
+    }
+
+    @Bean
+    public FilterRegistrationBean<MdcFilter> loggingFilter(RandomIdGenerator correlationIdGenerator, MdcContext mdcContext) {
+
+        final var registrationBean = new FilterRegistrationBean<MdcFilter>();
+
+        registrationBean.setFilter(new MdcFilter(mdcContext, correlationIdGenerator));
+        registrationBean.addUrlPatterns("/api", "/api/*");
+
+        return registrationBean;
+    }
+
+    @Bean
+    public RandomIdGenerator correlationIdGenerator() {
+        return new RandomIdGenerator() {};
     }
 }
 
