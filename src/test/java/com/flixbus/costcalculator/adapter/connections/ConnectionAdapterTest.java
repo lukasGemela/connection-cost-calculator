@@ -21,7 +21,7 @@ class ConnectionAdapterTest {
     @Mock
     CityRepository cityRepository;
 
-    private ConnectionAdapterImpl connectionAdapter;
+    private ConnectionAdapter connectionAdapter;
 
     @BeforeEach
     void setUp() {
