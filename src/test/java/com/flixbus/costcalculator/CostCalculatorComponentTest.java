@@ -18,8 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.containers.Neo4jContainer;
 import org.testcontainers.utility.MountableFile;
 
-import java.net.URL;
-import java.util.Objects;
 import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -30,8 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
 public class CostCalculatorComponentTest {
-
-    private static final URL TEST_DATA_FOLDER_URL = CostCalculatorComponentTest.class.getClassLoader().getResource("testdata/neo4j/csv");
 
     private static Neo4jContainer<?> NEO4J_CONTAINER;
 
@@ -48,8 +44,12 @@ public class CostCalculatorComponentTest {
     static void initializeNeo4j() {
         NEO4J_CONTAINER = new Neo4jContainer<>("neo4j")
                 .withAdminPassword("psw")
-                .withFileSystemBind(Objects.requireNonNull(TEST_DATA_FOLDER_URL).getPath(), "/var/lib/neo4j/import/data");
+                .withCopyFileToContainer(MountableFile.forClasspathResource("testdata/neo4j/csv/bus_cost.csv"), "/var/lib/neo4j/import/data/bus_cost.csv")
+                .withCopyFileToContainer(MountableFile.forClasspathResource("testdata/neo4j/csv/connection.csv"), "/var/lib/neo4j/import/data/connection.csv")
+                .withCopyFileToContainer(MountableFile.forClasspathResource("testdata/neo4j/csv/driver_cost.csv"), "/var/lib/neo4j/import/data/driver_cost.csv");
+
         NEO4J_CONTAINER.start();
+
     }
 
     @AfterAll
