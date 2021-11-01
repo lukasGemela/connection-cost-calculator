@@ -3,9 +3,6 @@ package com.flixbus.costcalculator.utils.logging;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-import java.util.Optional;
-
 @Component
 public class MdcContext {
 
