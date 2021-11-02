@@ -48,8 +48,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     runtime("io.micrometer:micrometer-registry-prometheus:1.5.3")
 
-    testImplementation group: 'org.testcontainers', name: 'neo4j', version: '1.16.2'
-    testImplementation "org.testcontainers:testcontainers:1.16.2"
+    testImplementation group: 'org.testcontainers', name: 'neo4j', version: '1.15.3'
+    testImplementation "org.testcontainers:testcontainers:1.15.3"
 
     testImplementation("org.assertj:assertj-core:3.21.0")
     testImplementation group: 'org.awaitility', name: 'awaitility', version: '4.0.2'
